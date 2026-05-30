@@ -8,16 +8,12 @@ plugins {
 
 android {
     namespace = "com.example.dragonballwikic"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.dragonballwikic"
         minSdk = 29
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -59,7 +55,26 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-    // Import the Firebase BoM
+    // Import the Firebase BoM - gestiona versiones automáticamente
     implementation(platform("com.google.firebase:firebase-bom:34.13.0"))
+    // Firebase Auth
+    implementation("com.google.firebase:firebase-auth-ktx:23.2.1")
+    // Firebase Firestore
+    implementation("com.google.firebase:firebase-firestore-ktx:25.1.4")
+    // Gson - para parsear el JSON de la API
+    implementation("com.google.code.gson:gson:2.10.1")
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    // Coroutines con Firebase
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+    // Coil para imágenes en Compose
+    implementation("io.coil-kt:coil-compose:2.5.0")
+    // ViewModel para Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.5")
+    // Navigation Compose
+    implementation("androidx.navigation:navigation-compose:2.7.7")
 }

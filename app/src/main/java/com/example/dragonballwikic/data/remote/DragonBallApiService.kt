@@ -12,7 +12,7 @@ interface DragonBallApiService {
     @GET("characters")
     suspend fun searchCharacterByName(
         @Query("name") name: String
-    ): CharacterResponse //culd be  CharacterResponse en lugar de List<Character>
+    ):List<Character>
 
     // Obtener personaje por ID
     @GET("characters/{id}")
@@ -25,5 +25,5 @@ interface DragonBallApiService {
     suspend fun getAllCharacters(
         @Query("page") page: Int = 1,
         @Query("limit") limit: Int = 10
-    ): List<Character>
+    ): CharacterResponse
 }

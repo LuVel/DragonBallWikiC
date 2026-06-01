@@ -12,7 +12,7 @@ class CharacterRepository {
     suspend fun searchCharacterByName(name: String): Result<List<Character>> {
         return try {
             val response = api.searchCharacterByName(name)
-            Result.success(response.items) // ← extrae la lista de items
+            Result.success(response)
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -32,7 +32,7 @@ class CharacterRepository {
     suspend fun getAllCharacters(page: Int = 1): Result<List<Character>> {
         return try {
             val response = api.getAllCharacters(page = page)
-            Result.success(response)
+            Result.success(response.items)  // ← agrega .items
         } catch (e: Exception) {
             Result.failure(e)
         }

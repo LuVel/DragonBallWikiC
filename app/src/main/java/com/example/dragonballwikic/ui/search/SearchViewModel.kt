@@ -24,6 +24,8 @@ class SearchViewModel : ViewModel() {
 
     fun searchCharacter(name: String) {
         if (name.isBlank()) return
+        val normalizedName = name.trim()
+            .replaceFirstChar { it.uppercase() }
 
         val lastCharacter = _uiState.value.character
 
@@ -34,7 +36,7 @@ class SearchViewModel : ViewModel() {
             )
 
             try {
-                val result = repository.searchCharacterByName(name)
+                val result = repository.searchCharacterByName(normalizedName)
                 if (result.isSuccess) {
                     val characters = result.getOrNull()
                     if (characters != null && characters.isNotEmpty()) {
@@ -53,11 +55,12 @@ class SearchViewModel : ViewModel() {
                         )
                     }
                 } else {
+                    val errorMsg = result.exceptionOrNull()?.message ?: "desconocido"
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
                         character = lastCharacter,
                         hasSearched = true,
-                        errorMessage = "Error al buscar el personaje"
+                        errorMessage = "Error: $errorMsg" //Necesito restaurar está etiqueta
                     )
                 }
             } catch (e: Exception) {
